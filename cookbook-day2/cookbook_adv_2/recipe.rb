@@ -14,4 +14,3 @@ end
 # Display them in an indexed list
 # Ask the user which recipe they want to import (ask for an index)
 # Add it to the Cookbook
-
