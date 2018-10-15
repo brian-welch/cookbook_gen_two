@@ -1,4 +1,6 @@
 require 'nokogiri'
+require 'open-uri'
+
 file = 'strawberry.html'
 doc = Nokogiri::HTML(File.open(file), nil, 'utf-8')
 
@@ -36,8 +38,3 @@ class Controller
 end
 
 <div id="ctl00_cphMainContent_m_ctrlSearchEngine_m_ctrlSearchListDisplay_rptResultSearch_ctl01_m_panelResul" class="m_item recette_classique">
-
-# STRUCTURE --> <div class="m_contenu_resultat">
-# RECIPE TITLE   --> <div class="m_titre_resultat">
-# PREP TIME HTML --> <div class="m_detail_time">
-# RECIPE DETAILS(DESCRIPTION) --> <div class="m_detail_recette"> EXAMPLE: <strong>Recipe</strong> - Dessert - Very easy - Cheap - Vegetarian</div>

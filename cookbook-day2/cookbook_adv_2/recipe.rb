@@ -4,6 +4,7 @@ class Recipe
   def initialize(name, description)
     @name = name
     @description = description
+    @prep_time = prep_time
   end
 end
 

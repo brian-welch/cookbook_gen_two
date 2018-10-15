@@ -9,7 +9,7 @@ class Cookbook
   end
 
   def all
-    return @recipes
+    @recipes
   end
 
   def add_recipe(new_recipe)
@@ -35,6 +35,20 @@ class Cookbook
   def load_csv
     CSV.foreach(@csv_path, @csv_options) do |row|
       @recipes << Recipe.new(row[0], row[1])
+    end
+  end
+
+  def import_recipe
+    recipes = []
+
+    html_doc.search('.m_contenu_resultat').each do |element|
+    name = element.search('.m_titre_resultat')
+    prep_time = element.search('.m_detail_time')
+    description = element.search('.m_detail_recette')
+    # puts name.text.strip
+    # puts prep_time.text.strip
+    # puts description.text.strip
+    recipes << [recipe.name, recipe.prep_time, recipe.description]
     end
   end
 end
