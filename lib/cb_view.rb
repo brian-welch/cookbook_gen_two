@@ -6,7 +6,7 @@ class CbView
   def show_all_recipes(all_recipes)
     display_title
     puts "Here are all your recipes:\n========================="
-    all_recipes.each.with_index { |each, i| puts "[#{i + 1}] #{each.name}: #{each.description}" }
+    all_recipes.each.with_index { |each, i| puts "[#{i + 1}] #{each.title}: #{each.sub_title}" }
   end
 
   def ask_user_for_recipe
@@ -19,7 +19,7 @@ class CbView
     new_recipe_description = gets.chomp
     display_title
     confirm_massage("created")
-    [new_recipe_name, new_recipe_description]
+    [new_recipe_name, new_recipe_description,'','']
   end
 
   def ask_user_what_to_delete(recipe_array)
