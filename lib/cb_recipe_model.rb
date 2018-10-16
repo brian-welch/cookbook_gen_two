@@ -1,21 +1,14 @@
 require 'pry-byebug'
 
+# cb recipe
 class CbRecipeModel
-  attr_accessor :title, :sub_title, :ingred, :method
+  attr_accessor :title, :abstract, :time, :difficulty, :cooked # , :nutrition, :prep_time, :category, :tags, :img
 
-  def initialize(title, sub_title, ingred, method) # , args = {})
-    @title      = title # string
-    @sub_title  = sub_title # string
-    @ingred     = ingred # array
-    @method     = method # string
-
-    # @difficulty = args[:difficulty].to_s # string
-    # @prep_time  = args[:prep_time].to_s # string
-    # @nurition   = args[:nurition].to_s # hash
-    # @category   = args[:category].to_s # array
-    # @tags       = args[:tags].to_s # array
-    # @img        = args[:img].to_s # string
-
-    @cooked     = false
+  def initialize(args = {})
+    @title      = args[:title]
+    @abstract   = args[:abstract]
+    @time       = args[:time]
+    @difficulty = args[:difficulty]
+    @cooked     = args[:cooked]
   end
 end

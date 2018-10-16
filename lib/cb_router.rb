@@ -1,4 +1,4 @@
-require 'pry-byebug'
+require          'pry-byebug'
 require_relative 'title'
 
 # Router
@@ -25,9 +25,10 @@ class CbRouter
     case action
     when 1 then @cb_controller.list
     when 2 then @cb_controller.create
-    when 3 then @cb_controller.destroy
+    when 3 then @cb_controller.web
     when 4 then @cb_controller.destroy
-    when 5 then stop
+    when 5 then @cb_controller.mark
+    when 0 then stop
     else
       display_title
       display_error
@@ -46,16 +47,18 @@ class CbRouter
     # puts "\nWhat action would you like to take?\n\n"
 
     puts "[1] - List all recipes"
-    puts "[2] - Create a new recipe"
-    puts "[3] - Delete a recipe"
-    puts "[4] - Fetch Recipes from the web and save them"
-    puts "[5] - Stop and exit the program"
+    puts "[2] - Create a new recipe by hand"
+    puts "[3] - Fetch Recipes from #{"www.letscookfrench.com".upcase}"
+    puts "[4] - Delete a recipe"
+    puts "[5] - Mark a recipe as 'cooked'"
+    puts "[0] - Stop and exit the program"
     print ">> "
   end
 
   def display_error
-    puts "°·.·°·.·°·.·°·.·°·.·°·.·°·.·°·.·°"
-    puts "You did not select a valid number"
-    puts "°·.·°·.·°·.·°·.·°·.·°·.·°·.·°·.·°"
+    x = "You did not select a valid number. '0' to quit."
+    puts "\t#{"°·.·" * ((x.length / 4) + 3)}"
+    puts "\t    #{x}"
+    puts "\t#{"°·.·" * ((x.length / 4) + 3)}"
   end
 end

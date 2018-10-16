@@ -1,14 +1,13 @@
 require          'pry-byebug'
-require_relative 'cb_repo'    # You need to create this file!
-require_relative 'cb_controller'  # You need to create this file!
+require_relative 'cb_repo'
+require_relative 'cb_controller'
 require_relative 'cb_router'
+require_relative 'web_recipe_parser'
 
-csv_file   = File.join(__dir__, 'recipes.csv')
-# binding.pry
-cb_repo   = CbRepo.new(csv_file)
-cb_controller = CbController.new(cb_repo)
+csv_file          = File.join(__dir__, 'recipes.csv')
+cb_repo           = CbRepo.new(csv_file)
+web_recipe_parser = WebRecipeParser.new
+cb_controller     = CbController.new(cb_repo, web_recipe_parser)
+router            = CbRouter.new(cb_controller)
 
-router = CbRouter.new(cb_controller)
-
-# Start the app
 router.run

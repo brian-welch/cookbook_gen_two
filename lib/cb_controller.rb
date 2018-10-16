@@ -6,9 +6,10 @@ require_relative 'cb_view'
 
 # controller
 class CbController
-  def initialize(cb_repo)
-    @cb_repo = cb_repo
-    @view = CbView.new
+  def initialize(cb_repo, web_recipe_parser)
+    @cb_repo           = cb_repo
+    @view              = CbView.new
+    @web_recipe_parser = web_recipe_parser
   end
 
   def list
@@ -16,9 +17,19 @@ class CbController
   end
 
   def create
-    details = @view.ask_user_for_recipe
-    new_recipe = CbRecipeModel.new(details[0], details[1],'','')
+    user_recipe = @view.ask_user_for_recipe
+    new_recipe = @cb_repo.instance_builder(user_recipe) # taken from CbRepo
     @cb_repo.add_recipe(new_recipe)
+  end
+
+  def web
+    keyword = @view.ask_user_for_keyword
+    web_recipes = @web_recipe_parser.web_recipe_getter(keyword)
+    to_import = @view.import(web_recipes)
+    web_recipe = @cb_repo.instance_builder(to_import)
+    display_title
+    @view.confirm_massage(to_import[0], 3)
+    @cb_repo.add_recipe(web_recipe)
   end
 
   def destroy
@@ -26,9 +37,12 @@ class CbController
     @cb_repo.remove_recipe(recipe_index)
   end
 
-  private
+  def mark
+    recipe_index = @view.ask_user_what_to_mark(recipe_array)
+    @cb_repo.mark_recipe(recipe_index)
+  end
 
-  def
+  private
 
   def recipe_array
     @cb_repo.all
